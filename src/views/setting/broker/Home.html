@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .container {
+      width: 100%;
+      height: 700px;
+    }
+
+    header {
+      width: 100%;
+      height: 50px;
+      background-color:  #E5FBFF;
+    }
+
+    article {
+      width: 100%;
+      height: 85%;
+      background-color: white;
+    }
+
+    .tab {
+      background: aliceblue;
+      margin: 0 1px;
+      border-radius: 10px;
+    }
+
+    .content {
+      width: 850px;
+      height: 100%;
+      background-color: aliceblue;
+      border-radius: 5px;
+      margin-left: 5px;
+      display: none;
+    }
+
+    .tab {
+      overflow: hidden;
+      border: 1px solid #ccc;
+      background-color: #f1f1f1;
+    }
+
+    /* Style the buttons inside the tab */
+    .tab button {
+      background-color: inherit;
+      float: left;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 14px 16px;
+      transition: 0.3s;
+      font-size: 17px;
+    }
+
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+      background-color: #ddd;
+    }
+
+    /* Create an active/current tablink class */
+    .tab button.active {
+      background-color: #ccc;
+    }
+
+    /* Style the tab content */
+    .tabcontent {
+      display: none;
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      border-top: none;
+    }
+
+    /* Style the close button */
+    .topright {
+      float: right;
+      cursor: pointer;
+      font-size: 28px;
+    }
+
+    .topright:hover {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <div class="row">
+        <div class="col-md-9">
+          <form class="d-flex">
+            <input  class="form-control me-2" type="search" placeholder="Tìm kiếm sản phẩm......" aria-label="Search"
+              style="margin-top: 5px; margin-left: 30px; width: 350px; height: 40px; border-radius: 30px;">
+            <div id="showTabName"
+              style="display: flex; align-items: center; justify-content: center; margin: 10px; padding-left: 10px; padding-right: 10px; ">
+            </div>
+          </form>
+        </div>
+        <div class="col-md-3" style="display: flex; align-items: center; justify-content: center;">
+          <a href="" text-decoration: none;> <svg style="margin-left: 20px; margin-top: 5px;"
+              xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-bag-x-fill"
+              viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM6.854 8.146a.5.5 0 1 0-.708.708L7.293 10l-1.147 1.146a.5.5 0 0 0 .708.708L8 10.707l1.146 1.147a.5.5 0 0 0 .708-.708L8.707 10l1.147-1.146a.5.5 0 0 0-.708-.708L8 9.293 6.854 8.146z" />
+            </svg></a>
+          <a href="" text-decoration: none;><svg style="margin-left: 20px; margin-top: 5px; "
+              xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-grid-3x3-gap"
+              viewBox="0 0 16 16">
+              <path
+                d="M4 2v2H2V2h2zm1 12v-2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1zm0-5V7a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1zm0-5V2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1zm5 10v-2a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1zm0-5V7a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1zm0-5V2a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1zM9 2v2H7V2h2zm5 0v2h-2V2h2zM4 7v2H2V7h2zm5 0v2H7V7h2zm5 0h-2v2h2V7zM4 12v2H2v-2h2zm5 0v2H7v-2h2zm5 0v2h-2v-2h2zM12 1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zm-1 6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V7zm1 4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1h-2z" />
+            </svg></a>
+          <a href="" text-decoration: none;><svg style="margin-left: 20px; margin-top: 5px; "
+              xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person"
+              viewBox="0 0 16 16">
+              <path
+                d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z" />
+            </svg></a>
+          <a href="">
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <article>
+      <div class="row">
+        <div id="content" class="col-md-8">
+          <!-- <button id="addTab" type="button" style="width: 30px; height: 30px; margin-top: 10px; border-radius: 50%;display: flex; justify-content: center;align-items: center;"><i style="margin-top: 2px;" class="fa-solid fa-plus"><span
+              class="material-symbols-outlined">
+              add
+            </span></i></button> -->
+          <div class="tab" style="width: 850px;">
+            <button class="tablinks" onclick="openCity(event, 'HoaDon1')" id="defaultOpen">Hóa đơn 1</button>
+            <button class="tablinks" onclick="openCity(event, 'HoaDon2')">Hóa đơn 2</button>
+            <button class="tablinks" onclick="openCity(event, 'HoaDon3')">Hóa đơn 3</button>
+            <!-- <button id="addButton">Thêm hóa đơn</button> -->
+          </div>
+
+          <div id="HoaDon1" class="tabcontent" style="width: 850px; height: 530px; border-radius: 10px;">
+            <h3>Hóa đơn 1</h3>
+            <div class="cart-body" style="height: 380px;">
+
+            </div>
+            <div class="cart-footer">
+              <div class="mb-3">
+                <textarea placeholder="Ghi chú đơn hàng......" style="width: 95%;height: 70px; margin-left: 20px;margin-top: 20px;" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div id="HoaDon2" class="tabcontent" style="width: 850px; height: 530px; border-radius: 10px;">
+            <h3>Hóa đơn 2</h3>
+            <div class="cart-body" style="height: 380px;">
+
+            </div>
+            <div class="cart-footer">
+              <div class="mb-3">
+                <textarea placeholder="Ghi chú đơn hàng......" style="width: 95%;height: 70px; margin-left: 20px; margin-top: 20px;" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div id="HoaDon3" class="tabcontent" style="width: 850px; height: 530px; border-radius: 10px;">
+            <h3>Hóa đơn 3</h3>
+            <div class="cart-body" style="height: 380px;">
+
+            </div>
+            <div class="cart-footer">
+              <div class="mb-3">
+                <textarea placeholder="Ghi chú đơn hàng......" style="width: 95%;height: 70px; margin-left: 20px;margin-top: 20px;" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div style="border-radius: 2%;height: 570px; background-color : #f1f1f1; margin-top: 10px; float: right;"
+          class="col-md-4">
+          <div class="row">
+            <div class="col-md-6">
+              <select class="form-select" aria-label="Default select example"
+                style="width: 180px; margin-left: 18px; margin-top: 10px; border-radius: 20px;">
+                <option selected>Nhân Viên</option>
+                <option value="1">BH-TT Tú</option>
+                <option value="2">BH-TT Kiên</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="form-group" style=" display: flex;  margin-left: 25px; margin-top: 10px;">
+                  <input style="width: 150px; margin-right: 5px; border-radius: 20px;" type="date" class="form-control" id="date-input"
+                    data-bs-toggle="datepicker" data-bs-target="#date-input">
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+          <div class="row">
+            <input class="form-control me-2" type="search" placeholder="Tìm kiếm khách hàng......" aria-label="Search"
+              style="margin-top: 5px; margin-left: 30px; width: 380px; height: 40px; margin-top: 10px;border-radius: 20px;">
+          </div>
+          <div class="row" style="margin-top: 30px;">
+            <h6 style="width: 60%;margin-left: 30px;">Tổng tiền hàng :</h6>
+            <h6 style="width: 30%;">0</h6>
+          </div>
+          <div class="row" style="margin-top: 30px;">
+            <h6 style="width: 60%;margin-left: 30px;">Giảm giá :</h6>
+            <h6 style="width: 30%;">0</h6>
+          </div>
+          <div class="row" style="margin-top: 30px;">
+            <h6 style="width: 60%;margin-left: 30px;">Thu khác :</h6>
+            <h6 style="width: 30%;">0</h6>
+          </div>
+          <div class="row" style="margin-top: 30px;">
+            <h6 style="width: 60%;margin-left: 30px;">Khách cần trả :</h6>
+            <h6 style="width: 30%;">0</h6>
+          </div>
+          <div class="row" style="margin-top: 30px;">
+            <h6 style="width: 60%;margin-left: 30px;">Khách thanh toán :</h6>
+            <h6 style="width: 30%;">0</h6>
+          </div>
+          <div class="row" style="margin-top: 50px;">
+            <div class="form-check" style="margin-left: 25px; width: 120px;">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+              <label class="form-check-label" for="flexRadioDefault1">
+                <h6>Tiền mặt</h6>
+              </label>
+            </div>
+            <div class="form-check" style="margin-left: 10px; width: 140px;">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+              <label class="form-check-label" for="flexRadioDefault1">
+                <h6>Chuyển khoản</h6>
+              </label>
+            </div>
+            <div class="form-check" style="margin-left: 23px; width: 120px;">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+              <label class="form-check-label" for="flexRadioDefault1">
+                <h6>Thẻ</h6>
+              </label>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 50px; width: 410px; margin-left: 6px;">
+            <button style="border-radius: 20px;" type="button" class="btn btn-outline-primary">Thanh Toán</button>
+          </div>
+
+
+        </div>
+      </div>
+    </article>
+    <footer style="background-color: #E5FBFF; width: 100%; height: 50px; margin-left: 3px;">
+
+    </footer>
+  </div>
+  <script>
+
+    const dateCurrent = () => {
+      let inputDate = document.getElementById('date-input')
+      console.log(inputDate)
+      let currentDate = new Date().toJSON().slice(0, 10);
+      inputDate.setAttribute('value', currentDate)
+    }
+    // const addTab = document.getElementById("addTab")
+    // const showTabName  = document.getElementById("showTabName")
+    // const content  = document.getElementById("content")
+
+
+    // addTab.addEventListener("click", () =>  {
+    //     let _tab=document.createElement('div');
+    //     _tab.classList.add('tab')
+    //     _tab.innerHTML="<p>asdasdasd </p>"
+    //     let _content=document.createElement('div');
+    //     _content.classList.add('content')
+    //     _content.innerHTML="<p>asdasdasd </p>"
+    //     showTabName.appendChild(_tab);
+    //     content.appendChild(_content)
+    // });
+    dateCurrent()
+  </script>
+  <script>
+    function openCity(evt, cityName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+    var tabContainer = document.getElementsByClassName("tab")[0];
+  </script>
+
+  <!-- <script>
+    // Lấy đối tượng phần tử cha của các tab
+    var tabContainer = document.getElementsByClassName("tab")[0];
+
+    // Tạo nút bấm
+    var addButton = document.getElementById("addButton");
+    addButton.onclick = function () {
+      // Tạo một tab mới
+      var newTab = document.createElement("div");
+      newTab.id = "HoaDon" + (tabContainer.children.length + 1);
+      newTab.classList.add("tabcontent");
+      newTab.style.width = "850px";
+      newTab.style.height = "530px";
+      newTab.style.borderRadius = "10px";
+
+      // Thêm nội dung vào tab mới
+      var newTabHeading = document.createElement("h3");
+      newTabHeading.innerHTML = "Hóa đơn " + (tabContainer.children.length + 1);
+      newTab.appendChild(newTabHeading);
+
+      // Thêm tab mới vào phần tử cha
+      tabContainer.insertBefore(newTab, addButton);
+    }
+
+  </script> -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

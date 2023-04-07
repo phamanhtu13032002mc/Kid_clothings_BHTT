@@ -1,0 +1,64 @@
+variables:
+  IMAGE_TAG: $CI_COMMIT_SHORT_SHA
+stages:
+  - build_images
+  - deploy
+###########################################
+build_image_dev:
+  stage: build_images
+  variables:
+    ENVIRONMENT: develop
+  tags:
+    - 5roi-dev
+  only:
+    - develop
+  before_script:
+    - rm -rf /home/gitlab-runner/$CI_PROJECT_NAME
+    - mv $CI_PROJECT_DIR /home/gitlab-runner/
+  script:
+    - cd /home/gitlab-runner/$CI_PROJECT_NAME && cat $ENV_DEV >> .env
+    - docker login --username "${CI_REGISTRY_USER}" --password "${CI_REGISTRY_PASSWORD}" "${CI_REGISTRY}"
+    - docker build -t $CI_REGISTRY_IMAGE:$ENVIRONMENT-$IMAGE_TAG .
+    - docker push $CI_REGISTRY_IMAGE:$ENVIRONMENT-$IMAGE_TAG
+
+build_image_prod:
+  stage: build_images
+  variables:
+    ENVIRONMENT: prod
+  tags:
+    - 5roi-prod
+  only:
+    - main
+  before_script:
+    - rm -rf /home/gitlab-runner/$CI_PROJECT_NAME
+    - mv $CI_PROJECT_DIR /home/gitlab-runner/
+  script:
+    - cd /home/gitlab-runner/$CI_PROJECT_NAME && cat $ENV_PROD >> .env
+    - docker login --username "${CI_REGISTRY_USER}" --password "${CI_REGISTRY_PASSWORD}" "${CI_REGISTRY}"
+    - docker build -t $CI_REGISTRY_IMAGE:$ENVIRONMENT-$IMAGE_TAG .
+    - docker push $CI_REGISTRY_IMAGE:$ENVIRONMENT-$IMAGE_TAG
+###########################################
+deploy_to_dev:
+  stage: deploy
+  variables:
+    ENVIRONMENT: develop
+  tags:
+    - 5roi-dev
+  only:
+    - develop
+  script:
+    - docker rm -f $CI_PROJECT_NAME
+    - docker run -itd --name $CI_PROJECT_NAME -p 3000:3000 $CI_REGISTRY_IMAGE:$ENVIRONMENT-$IMAGE_TAG
+
+deploy_to_prod:
+  stage: deploy
+  variables:
+    ENVIRONMENT: prod
+  tags:
+    - 5roi-prod
+  only:
+    - main
+  script:
+    - docker rm -f $CI_PROJECT_NAME
+    - docker run -itd --name $CI_PROJECT_NAME --network=app -e $VIRTUAL_HOST -e $LETSENCRYPT_HOST -e $LETSENCRYPT_EMAIL $CI_REGISTRY_IMAGE:$ENVIRONMENT-$IMAGE_TAG
+  when: manual

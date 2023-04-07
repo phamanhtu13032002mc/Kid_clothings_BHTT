@@ -1,0 +1,84 @@
+
+.row{
+ margin-bottom:15px;
+}
+
+
+.table {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    overflow-x:auto;
+}
+
+.mt-3 {
+    text-align: right;
+    float: right;
+}
+
+.MuiPagination-ul {
+    float: right;
+}
+
+#tableD {
+    border: 2px solid rgb(153, 153, 153);
+
+}
+
+td .content {
+    word-break: break-all !important;
+    text-overflow: ellipsis;
+    max-width: 190px;
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap
+}
+td .content:hover {
+    overflow: visible; 
+    white-space: normal;
+    height:auto;
+}
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+    --cui-table-accent-bg: var(--cui-table-striped-bg);
+    color: var(--cui-table-striped-color);
+  }
+  .table-bordered > :not(caption) > {
+    word-break: break-all !important;
+    text-overflow: ellipsis;
+    max-width: 200px;
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+  }
+  .table-bordered > :not(caption) :hover {
+    overflow: visible;
+    white-space: normal;
+    // height: auto;
+  }
+//Style popup
+  #alert-create {
+    margin-top: 40px;
+    margin-left: 160px;
+  }
+  #alert-cancel {
+    margin-top: 40px;
+    margin-left: 130px;
+}
+ #dialog1{
+     margin-left: 28%;
+ }
+ #label1{
+     margin-left:10px;
+ }
+ #select1{
+    margin-left:70px
+}
+#select2{
+    margin-left:44px
+}
+#input1{
+    margin-left:130px;
+}
+#input2{
+    margin-left:80px;
+}
